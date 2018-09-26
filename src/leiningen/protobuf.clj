@@ -99,7 +99,7 @@
   [project]
   (let [srcdir (srcdir project)
         protoc (protoc project)]
-    (when-not (.exists protoc)
+    (when-not (and protoc (.exists protoc))
       (fetch project)
       (fs/chmod "+x" (io/file srcdir "autogen.sh"))
       (sh/stream-to-out (sh/proc "./autogen.sh" :dir srcdir) :out)
